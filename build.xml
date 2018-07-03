@@ -1,0 +1,85 @@
+<?xml version="1.0" ?> 
+<project name="AntExample1" default="war">
+
+  <property name = "testdir" location = "src/com/vaannila/testcase" />
+   <property name = "srcdir" location = "src" />
+   <property name = "full-compile" value = "true" />
+	
+	
+	<path id = "classpath.test">
+  
+     <fileset dir="WebContent/WEB-INF/lib">
+			<include name="*.jar"/>
+	 </fileset>
+      <pathelement location = "${testdir}" />
+      <pathelement location = "${srcdir}" />
+	  <pathelement location="bin"/>
+      
+   </path>
+
+	<path id="compile.classpath">
+		<fileset dir="WebContent/WEB-INF/lib">
+			<include name="*.jar"/>
+		</fileset>
+		
+	</path>
+	
+	<target name="init">
+		<mkdir dir="build/classes"/>
+		<mkdir dir="dist" />
+	</target>
+	
+	<target name="compile" depends="init" >
+		<javac destdir="build/classes" debug="true" srcdir="src">
+			<classpath refid="compile.classpath"/>
+		</javac>
+	</target>
+	
+	
+	<target name = "testcompile" depends = "clean">
+      <javac srcdir = "${srcdir}" destdir = "${testdir}" 
+         verbose = "${full-compile}">
+         <classpath refid = "classpath.test"/>
+      </javac>
+   </target>
+   
+   
+   <target name = "test" depends = "testcompile">
+      <junit>
+         <classpath refid = "classpath.test" />
+         <formatter type = "brief" usefile = "false" />
+         <test name = "com.vaannila.testcase.DivisionTestCase" haltonfailure="no" outfile="result">
+		     <formatter type="plain" />
+             <formatter type="xml" />
+		 </test>
+      </junit>
+   </target>
+	
+	<target name="war" depends="compile">
+		<war destfile="dist/AntExample.war" webxml="WebContent/WEB-INF/web.xml">
+			<fileset dir="WebContent"/>
+			<lib dir="WebContent/WEB-INF/lib"/>
+			<classes dir="build/classes"/>
+		</war>
+	</target>
+	
+	
+	
+	<target name="deploy" description="Copy files to deploy folder.">
+        <copy todir="D:/tomcatstuff/webapps">
+            <fileset dir="dist">
+                <include name="*.war" />
+               
+            </fileset>
+        </copy>
+     </target>
+	
+	<target name="clean">
+		<delete dir="dist" />
+		<delete dir="build" />
+		 <delete verbose = "${full-compile}">
+            <fileset dir = "${testdir}" includes = "**/*.class" />
+        </delete>
+	</target>
+	
+</project>
