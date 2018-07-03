@@ -66,7 +66,7 @@
 	
 	
 	<target name="deploy" description="Copy files to deploy folder.">
-        <copy todir="D:\\Tomcat\\apache-tomcat-7.0.85-windows-x86\\apache-tomcat-7.0.85\\webapps ">
+        <copy todir="D:/Tomcat/apache-tomcat-7.0.85-windows-x86/apache-tomcat-7.0.85/webapps">
             <fileset dir="dist">
                 <include name="*.war" />
                
