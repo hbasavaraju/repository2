@@ -4,18 +4,24 @@
   <property name = "testdir" location = "src/com/vaannila/testcase" />
    <property name = "srcdir" location = "src" />
    <property name = "full-compile" value = "true" />
+   <property name="sonar.projectKey" value="org.sonarqube:sonarqube-scanner-ant" />
+    <property name="sonar.projectName" value="AntExample1" />
+    <property name="sonar.projectVersion" value="1.0" />
+    <property name="sonar.host.url" value="http://sonatasonar.cloudapp.net:9000" />
+    <property name="sonar.sources" value="src" />
+    <property name="sonar.java.binaries" value="dist" />	
 	
 	
 	<path id = "classpath.test">
   
-     <fileset dir="WebContent/WEB-INF/lib">
+           <fileset dir="WebContent/WEB-INF/lib">
 			<include name="*.jar"/>
-	 </fileset>
-      <pathelement location = "${testdir}" />
-      <pathelement location = "${srcdir}" />
+	   </fileset>
+         <pathelement location = "${testdir}" />
+         <pathelement location = "${srcdir}" />
 	  <pathelement location="bin"/>
       
-   </path>
+        </path>
 
 	<path id="compile.classpath">
 		<fileset dir="WebContent/WEB-INF/lib">
@@ -23,6 +29,16 @@
 		</fileset>
 		
 	</path>
+	<path id="sonar.classpath">
+		<fileset dir="lib" includes="*.jar" />
+ 	</path>
+	
+	<target name="sonar" depends="war">	
+	    <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
+    		<classpath refid="sonar.classpath" />
+  	    </taskdef>
+	    <sonar:sonar   xmlns:sonar="antlib:org.sonar.ant"> </sonar:sonar>
+ 	</target>
 	
 	<target name="init">
 		<mkdir dir="build/classes"/>
