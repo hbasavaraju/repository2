@@ -30,7 +30,7 @@
 		
 	</path>
 	<path id="sonar.classpath">
-		<fileset dir="lib" includes="*.jar" />
+		<fileset dir="WebContent/WEB-INF/lib" includes="*.jar" />
  	</path>
 	
 	<target name="sonar" depends="war">	
