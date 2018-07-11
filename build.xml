@@ -9,7 +9,7 @@
     <property name="sonar.projectVersion" value="1.0" />
     <property name="sonar.host.url" value="http://sonatasonar.cloudapp.net:9000/" />
     <property name="sonar.sources" value="src" />
-    <property name="sonar.java.binaries" value="dist/AntExample.war" />	
+    <property name="sonar.java.binaries" value="testdir" />	
 	
 	
 	<path id = "classpath.test">
@@ -33,7 +33,7 @@
 		<fileset dir="WebContent/WEB-INF/lib" includes="*.jar" />
  	</path>
 	
-	<target name="sonar" depends="war">	
+	<target name="sonar" depends="war testcompile">	
 	    <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
     		<classpath refid="sonar.classpath" />
   	    </taskdef>
