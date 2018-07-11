@@ -9,7 +9,7 @@
     <property name="sonar.projectVersion" value="1.0" />
     <property name="sonar.host.url" value="http://sonatasonar.cloudapp.net:9000/" />
     <property name="sonar.sources" value="src" />
-    <property name="sonar.java.binaries" value="dist" />	
+    <property name="sonar.java.binaries" value="dist/AntExample.war" />	
 	
 	
 	<path id = "classpath.test">
