@@ -8,7 +8,8 @@ public class DivisionTest {
 	//data members
 	int num1, num2;
 	
-	// master branch
+	// new branch
+	
 	
 	//parameterised constructor
 	public DivisionTest(int num1, int num2){
